@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MahJongEssential</string>
+    <string name="title_home">首頁</string>
+    <string name="title_dashboard">儀錶板</string>
+    <string name="title_notifications">近期對戰紀錄</string>
+    <string name="dice">擲骰</string>
+    <string name="tsumo">自摸</string>
+    <string name="gmaerecord">對戰紀錄</string>
+</resources>
