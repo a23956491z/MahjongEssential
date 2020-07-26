@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Mytest</string>
+    <string name="app.com">1.12.1</string>
+    <string name="button">登入</string>
+    <string name="username">請輸入帳號</string>
+    <string name="user.code">請輸入密碼</string>
+    <string name="image1" />
+</resources>
