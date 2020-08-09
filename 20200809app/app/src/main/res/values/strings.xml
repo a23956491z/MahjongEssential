@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">20200809app</string>
+    <string name="textview1">隊伍A</string>
+    <string name="textview2">隊伍2</string>
+    <string name="textview3">隊伍B</string>
+    <string name="textview4">0</string>
+    <string name="textview5">0</string>
+    <string name="button1">+1</string>
+    <string name="button4">+1</string>
+    <string name="button2">Button</string>
+    <string name="button22">+2</string>
+    <string name="button22">+2</string>
+    <string name="button5">+2</string>
+    <string name="button3">+3</string>
+    <string name="button6">+3</string>
+    <string name="buttonundo">undo</string>
+    <string name="resetbutton">reset</string>
+</resources>

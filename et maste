@@ -1,0 +1,103 @@
+[33mcommit 63a7548d9b150395083a7120c8114f5dca264be3[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Easonchen0008 <beasonchen0008@gmail.com>
+Date:   Sun Jul 26 23:05:22 2020 +0800
+
+    第一個測驗App`
+
+[33mcommit ee197993a5d947f5e678765060f03aba5daa42b3[m
+Author: Enip <a23956491z@yahoo.com.tw>
+Date:   Sun Jul 19 04:36:18 2020 +0800
+
+    成功連接資料庫
+            使用mysql的jcbd連接本機資料庫
+    
+            JavaToMySQLTest類別中的sql述句目前是寫死的，未來會再包裝
+    
+            將client/內的android studio專案資料夾更名為"project"
+    
+            ---備註---
+            執行Main時需import mysql_connector/connector.jar
+    
+            quick_command.txt中的編譯和執行指令還需要加上備註
+
+[33mcommit 1e2c158d39675cde246f9582013c77c6be9a96f8[m
+Author: Tens <zxc40612zxc@gmail.com>
+Date:   Sat Jul 18 19:56:33 2020 +0800
+
+    The whole MJE Android Studio Project
+
+[33mcommit 3a60cd90fbb03cbcc3189528ef4a0fdd3277e514[m
+Merge: cd65950 750a3a8
+Author: Enip <a23956491z@yahoo.com.tw>
+Date:   Sat Jul 18 00:09:06 2020 +0800
+
+    刪除test
+
+[33mcommit cd659503b0ccb55261b0febac94e8bf5bd7e0bab[m
+Author: Enip <a23956491z@yahoo.com.tw>
+Date:   Sat Jul 18 00:06:57 2020 +0800
+
+    刪除test檔案
+
+[33mcommit 750a3a884d915a41f837375fbbeeed6ddb3d623a[m
+Merge: 01dd3e6 7b53147
+Author: Easonchen0008 <beasonchen0008@gmail.com>
+Date:   Sat Jul 18 00:05:00 2020 +0800
+
+    Merge branch 'master' of https://github.com/a23956491z/MahjongEssential
+
+[33mcommit 01dd3e6e671f6a3eb33543be25109c4713c37997[m
+Author: Easonchen0008 <beasonchen0008@gmail.com>
+Date:   Sat Jul 18 00:02:06 2020 +0800
+
+    test3
+
+[33mcommit 7b531473cbcb05302bb1bc59813fd9ed8e43d74e[m
+Author: Tens <zxc40612zxc@gmail.com>
+Date:   Sat Jul 18 00:01:11 2020 +0800
+
+    test3
+
+[33mcommit 59d946c683a78e6f60b5d1b4ed7fede4fec89257[m
+Author: Tens <zxc40612zxc@gmail.com>
+Date:   Fri Jul 17 23:58:15 2020 +0800
+
+    test2
+
+[33mcommit 984cf7ee663de62210c470fe7eefc6a5921e4a83[m
+Merge: e966f27 7ca5a81
+Author: Easonchen0008 <beasonchen0008@gmail.com>
+Date:   Fri Jul 17 23:55:01 2020 +0800
+
+    Merge branch 'master' of https://github.com/a23956491z/MahjongEssential
+
+[33mcommit e966f27026bd49429afc6faa94e5730203774f9f[m
+Author: Easonchen0008 <beasonchen0008@gmail.com>
+Date:   Fri Jul 17 23:50:07 2020 +0800
+
+    GG
+
+[33mcommit 7ca5a8128a844bf4d27265a16ebc566f94cd0593[m
+Author: Tens <zxc40612zxc@gmail.com>
+Date:   Fri Jul 17 23:44:15 2020 +0800
+
+    一個txt
+
+[33mcommit 056c9da0d8bfca56f1c15df1ae4841abe72f6a5f[m
+Author: Enip <a23956491z@yahoo.com.tw>
+Date:   Fri Jul 17 23:29:16 2020 +0800
+
+    新增一堆空資料夾
+
+[33mcommit cf44b7af0a3baa208b984a65dbc866e71c366038[m
+Author: Enip <a23956491z@yahoo.com.tw>
+Date:   Fri Jul 17 01:38:04 2020 +0800
+
+    Describe functions in project
+    Created folders to cooperate
+
+[33mcommit ce0c4dff755fc5ad9d9ee8c9c3d7cd31ec0572ae[m
+Author: pineapple <a23956491z@yahoo.com.tw>
+Date:   Fri Jul 17 00:22:03 2020 +0800
+
+    Initial commit
