@@ -4,6 +4,11 @@ import java.awt.color.ProfileDataException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+
 
 /**
  * This class can handle the information and behavior of account
@@ -18,6 +23,9 @@ public class Account extends Database_connector{
 	private String login_account;
 	private String login_password;
 	private String account_name;
+	
+	private List<Role> role_list = new ArrayList<Role>();
+	private Map<String, Match> match_map;
 	
 	public Account() {
 		super();
@@ -35,8 +43,8 @@ public class Account extends Database_connector{
 	
 	/**
 	 * return user's login account.
-	 * @return A String which is account;
-	 * @throws ProfileDataException appears, someone trying to get information of
+	 * @return A <code>String</code> which is account;
+	 * @throws <code>ProfileDataException</code> appears, someone trying to get information of
 	 *  this instance(user) from database or itself when it is not authenticated.
 	 */
 	public String get_account() throws ProfileDataException{
@@ -47,8 +55,8 @@ public class Account extends Database_connector{
 	
 	/**
 	 * return user's login password.
-	 * @return A String which is password;
-	 * @throws ProfileDataException appears, someone trying to get information of
+	 * @return A <code>String</code> which is password;
+	 * @throws <code>ProfileDataException</code> appears, someone trying to get information of
 	 *  this instance(user) from database or itself when it is not authenticated.
 	 */
 	public String get_password() throws ProfileDataException{
@@ -58,14 +66,14 @@ public class Account extends Database_connector{
 	}
 	
 	/**
-	 * Accounts have a column call "account_name" (not the name of player)
+	 * Accounts have a column call <code>account_name</code> (not the name of player)
 	 * which can be null, and when this account is exists and its name is actually null,
-	 * returning a empty String instead of null.
+	 * returning a empty <code>String</code> instead of null.
 	 * 
 	 * 
-	 * @return a String which is the name of account.
+	 * @return a <code>String</code> which is the name of account.
 	 * When the name of account is empty, returning a empty String.
-	 * @throws ProfileDataException appears, someone trying to get information of
+	 * @throws <code>ProfileDataException</code> appears, someone trying to get information of
 	 *  this instance(user) from database or itself when it is not authenticated.
 	 */
 	public String get_name() throws ProfileDataException{
@@ -73,9 +81,9 @@ public class Account extends Database_connector{
 		if(is_authenticated()) {
 		    String get_password_by_account = ("SELECT account_name FROM user_attribute WHERE login_account = \'"+login_account + "\'");
 	        
-	        try (Statement statement = connection.createStatement()) {
+	        try (Statement statement = connection.createStatement();
+	        	 ResultSet rs = statement.executeQuery(get_password_by_account)) {
 
-	            ResultSet rs = statement.executeQuery(get_password_by_account);
 	            if (rs.next()) {
 	            	account_name = rs.getString("account_name");
 	            	if(account_name == null) account_name = "";
@@ -107,9 +115,10 @@ public class Account extends Database_connector{
 
         String get_password_by_account = ("SELECT password FROM user_attribute WHERE login_account = \'"+account + "\'");
         
-        try (Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement();
+        	 ResultSet rs = statement.executeQuery(get_password_by_account);) {
 
-            ResultSet rs = statement.executeQuery(get_password_by_account);
+           
             if (rs.next()) {
             	Boolean if_authenticated = password.equals(rs.getString("password")) ? true : false;
             	
@@ -132,7 +141,7 @@ public class Account extends Database_connector{
     }
     
     /**
-     * 
+     * Register a new account
      * @param account login account
      * @param password login password
      * @param name this is the name of account not the player
@@ -146,6 +155,7 @@ public class Account extends Database_connector{
 		try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 				ResultSet.CONCUR_UPDATABLE)){
 			
+			//check the account is not exists
 			ResultSet rs = statement.executeQuery("SELECT * FROM user_attribute WHERE login_account = '"+account+"\'");
 			
 			if(rs.next()) return 0;
@@ -168,6 +178,130 @@ public class Account extends Database_connector{
 		
 		return -1;
 	}
+    
+    public int change_password(String old_password, String new_password) throws ProfileDataException{
+    	
+    	try {
+    		
+    		get_account();
+    	}catch(ProfileDataException p){
+    		
+    		p.printStackTrace();
+    		Throwable t = p.fillInStackTrace();
+    		throw (ProfileDataException)t;
+    		//print exception stack by set stack begin as this re-throw
+    	}
+    	
+    	if(old_password.equals(login_password) == false) {
+    		return 0;
+    	}
+    	
+    	try(Statement statement = connection.createStatement(
+    									ResultSet.TYPE_SCROLL_SENSITIVE,
+    									ResultSet.CONCUR_UPDATABLE);
+    		ResultSet rs = statement.executeQuery(get_sql_select_by_account(login_account))){
+    		
+    		rs.last();
+			rs.updateString("password", new_password);
+			rs.updateRow();
+
+			return 1;
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+    	
+    	return -1;
+    }
+
+    public int change_name(String name) throws ProfileDataException{
+    	
+    	try {
+    		
+    		get_account();
+    	}catch(ProfileDataException p){
+    		
+    		p.printStackTrace();
+    		Throwable t = p.fillInStackTrace();
+    		throw (ProfileDataException)t;
+    		//print exception stack by set stack begin as this re-throw
+    	}
+    	
+    	try(Statement statement = connection.createStatement(
+    									ResultSet.TYPE_SCROLL_SENSITIVE,
+    									ResultSet.CONCUR_UPDATABLE);
+    		ResultSet rs = statement.executeQuery(get_sql_select_by_account(login_account))){
+    		
+    		rs.last();
+			rs.updateString("account_name", name);
+			rs.updateRow();
+
+			return 1;
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+    	
+    	return 0;
+    }
+    
+    public int get_roles() throws ProfileDataException {
+    	try {
+    		
+    		get_account();
+    	}catch(ProfileDataException p){
+    		
+    		p.printStackTrace();
+    		Throwable t = p.fillInStackTrace();
+    		throw (ProfileDataException)t;
+    		//print exception stack by set stack begin as this re-throw
+    	}
+
+    	try(Statement statement = connection.createStatement();
+    		ResultSet rs = statement.executeQuery
+    				("SELECT * FROM role_attribute WHERE login_account = '"+login_account+"\'"))
+    	{
+    		
+    		while(rs.next()) {
+    			String role_id = rs.getString("role_id");
+    			String role_name = rs.getString("role_name");
+    			role_list.add(new Role(role_id, role_name));
+    			
+    		}
+
+			return 1;
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+    	return 0;
+    	
+    	
+    }
+    
+    public int change_role_name(String new_name) {
+    	return 0;
+    }
+    public void print_role() {
+    	
+    	get_roles();
+    	
+    	for(Role r : role_list) {
+    		System.out.print("id : "+r.get_id()+" ");
+    		System.out.println("name : "+r.get_name());
+    	}
+    	System.out.println("\n\n");
+    }
+    
+    private String get_sql_select_by_account(String account) {
+    	return "SELECT * FROM user_attribute WHERE login_account = '"+account+"\'";
+    }
+    
+    
+
     
 	
 }

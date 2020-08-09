@@ -19,7 +19,8 @@ public class Database_connector implements AutoCloseable{
 
     static final String USER = "test_user";
     static final String PASS = "test1234";
-
+    
+   
     /* !!! notice !!! a static connection will keep single connection
      * lasting too long resulting memory leaking problem and it's not threadsafe.
      * */ 
@@ -49,7 +50,7 @@ public class Database_connector implements AutoCloseable{
         String url = "jdbc:mysql://" + serverName + "/" + database;
 
         return DriverManager.getConnection(url, USER, PASS);
-  }
+    }
     
     public Database_connector(){
     	super();
@@ -59,6 +60,11 @@ public class Database_connector implements AutoCloseable{
         }catch (SQLException e) {
             System.out.println("Connecting to database failed!!");
         }
+    }
+    
+    public Database_connector(Database_connector db) {
+    	super();
+    	connection = db.connection;
     }
 
     /**

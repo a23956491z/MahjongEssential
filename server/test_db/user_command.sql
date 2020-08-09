@@ -1,27 +1,30 @@
 CREATE DATABASE IF NOT EXISTS  database_MJE_test;
 
 CREATE TABLE IF NOT EXISTS `user_attribute`(
-   `account_number` VARCHAR(24) NOT NULL UNIQUE,
+   `login_account` VARCHAR(24) NOT NULL UNIQUE,
    `password` VARCHAR(24) NOT NULL,
    `account_name` VARCHAR(40),
-   PRIMARY KEY ( `account_number` )
+   PRIMARY KEY ( `login_account` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `role_attribute`(
    `role_id` INT NOT NULL AUTO_INCREMENT,
    `role_name` VARCHAR(24) NOT NULL,
-   `account_number` VARCHAR(24) NOT NULL,
+   `login_account` VARCHAR(24) NOT NULL,
    `score_balance` INT DEFAULT 0,
-   CONSTRAINT u_account_role UNIQUE(account_number, role_name)
-   FOREIGN KEY(account_number) REFERENCES user_attribute(account_number) ,
-   PRIMARY KEY ( `role_id` )
+   CONSTRAINT u_account_role
+            UNIQUE(login_account, role_name)
+   FOREIGN KEY(login_account)
+            REFERENCES user_attribute(login_account) ,
+    PRIMARY KEY ( `role_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  CREATE TABLE IF NOT EXISTS `match_information`(
      `match_serial_number` BIGINT NOT NULL AUTO_INCREMENT,
      `match_created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-     `account_number` VARCHAR(24) NOT NULL,
-     FOREIGN KEY(account_number) REFERENCES user_attribute(account_number) ,
+     `login_account` VARCHAR(24) NOT NULL,
+     FOREIGN KEY(login_account)
+            REFERENCES user_attribute(login_account) ,
      PRIMARY KEY ( `match_serial_number` )
  )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -30,8 +33,10 @@ CREATE TABLE IF NOT EXISTS `role_attribute`(
      `round_number` INT NOT NULL,
      `role_name` VARCHAR(24) NOT NULL,
      `score_change` INT NOT NULL,
-     CONSTRAINT u_match_round_name UNIQUE(match_serial_number, round_number, role_name),
-     FOREIGN KEY(match_serial_number) REFERENCES match_information(match_serial_number),
+     CONSTRAINT u_match_round_name
+            UNIQUE(match_serial_number, round_number, role_name),
+     FOREIGN KEY(match_serial_number)
+            REFERENCES match_information(match_serial_number),
      PRIMARY KEY ( `match_serial_number` )
  )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -40,9 +45,9 @@ CREATE TABLE IF NOT EXISTS `role_attribute`(
 /********** testing_data following **********/
  DELETE FROM user_attribute;
 
- INSERT INTO user_attribute(account_number ,password)
+ INSERT INTO user_attribute(login_account ,password)
     VALUES('i dont have a name', '87878');
- INSERT INTO user_attribute(account_number ,password, account_name)
+ INSERT INTO user_attribute(login_account ,password, account_name)
     VALUES('test_acc_1', '0000', 'abby'),
           ('test_acc_2', '1234', 'mike');
 
@@ -51,34 +56,34 @@ CREATE TABLE IF NOT EXISTS `role_attribute`(
  /*change password*/
  UPDATE user_attribute
     SET password = '30678'
-    WHERE account_number = 'test_acc_1';
+    WHERE login_account = 'test_acc_1';
 
 /*change user name*/
 UPDATE user_attribute
    SET password = 'miiiiike'
-   WHERE account_number = 'test_acc_2';
+   WHERE login_account = 'test_acc_2';
 
 
  SELECT * FROM user_attribute;
 
  /*inset new role*/
- INSERT INTO role_attribute(account_number, role_name)
+ INSERT INTO role_attribute(login_account, role_name)
      VALUES('test_acc_1', 'abby'),
            ('test_acc_1', 'ruby'),
            ('test_acc_1', 'diana'),
            ('test_acc_2', 'mikey');
- INSERT INTO role_attribute(account_number, role_name)
+ INSERT INTO role_attribute(login_account, role_name)
      VALUES('test_acc_1', 'mikey');
  SELECT * FROM role_attribute;
 
  /*checkout an account's roles*/
  SELECT role_name
      FROM role_attribute
-     WHERE account_number = 'test_acc_1';
+     WHERE login_account = 'test_acc_1';
 
  /*delete an account's role*/
  DELETE FROM role_attribute
-     WHERE account_number = 'test_acc_1'
+     WHERE login_account = 'test_acc_1'
          AND role_name = 'ruby';
  SELECT * FROM role_attribute;
 
@@ -86,7 +91,7 @@ UPDATE user_attribute
 
 /*create match*/
     /*match infor*/
-INSERT INTO match_information(account_number)
+INSERT INTO match_information(login_account)
     VALUE('test_acc_1');
 
     /*match record*/
