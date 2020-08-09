@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">計算台數app</string>
+    <string name="button1">自摸+1</string>
+    <string name="button2">門清+1</string>
+    <string name="button3">三元(中發白)+1</string>
+    <string name="button4">場風+1</string>
+    <string name="Button5">門風+1</string>
+    <string name="button55">門風+1</string>
+    <string name="button6">正花+1</string>
+    <string name="button7">獨聽+1</string>
+    <string name="button8">槓上開花+1</string>
+    <string name="Button9">海底撈月+1</string>
+    <string name="button10">搶槓+1</string>
+    <string name="button11">花槓+2</string>
+    <string name="button12">全求人+2</string>
+    <string name="button13">平胡+2</string>
+    <string name="button14">三暗刻+2</string>
+    <string name="button15">門清一摸三+3</string>
+    <string name="button16">碰碰胡+4</string>
+    <string name="button17">混一色+4</string>
+    <string name="button18">小三元+4</string>
+    <string name="button19">地聽+4</string>
+    <string name="button20">四暗刻+5</string>
+    <string name="button21">稀有牌型</string>
+    <string name="button_back">返回</string>
+    <string name="button_next">確認</string>
+    <string name="textview1">0</string>
+    <string name="textview2" />
+</resources>
