@@ -24,7 +24,7 @@ public class Account extends Database_connector{
 	private String login_password;
 	private String account_name;
 	
-	private List<Role> role_list = new ArrayList<Role>();
+	private Role_list role_list = new Role_list();
 	private Map<String, Match> match_map;
 	
 	public Account() {
@@ -125,6 +125,7 @@ public class Account extends Database_connector{
             	if(if_authenticated) {
             		login_account = account;
             		login_password = password;
+            		get_roles();
             	}
             	return if_authenticated ? 1 : 0;
             }
@@ -267,16 +268,18 @@ public class Account extends Database_connector{
     		while(rs.next()) {
     			String role_id = rs.getString("role_id");
     			String role_name = rs.getString("role_name");
-    			role_list.add(new Role(role_id, role_name));
+    			role_list.add_role(role_id, role_name);
     			
     		}
-
+    		
 			return 1;
 			
 			
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+    	
+    	
     	return 0;
     	
     	
@@ -285,16 +288,7 @@ public class Account extends Database_connector{
     public int change_role_name(String new_name) {
     	return 0;
     }
-    public void print_role() {
-    	
-    	get_roles();
-    	
-    	for(Role r : role_list) {
-    		System.out.print("id : "+r.get_id()+" ");
-    		System.out.println("name : "+r.get_name());
-    	}
-    	System.out.println("\n\n");
-    }
+
     
     private String get_sql_select_by_account(String account) {
     	return "SELECT * FROM user_attribute WHERE login_account = '"+account+"\'";
