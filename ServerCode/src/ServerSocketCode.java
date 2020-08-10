@@ -26,9 +26,10 @@ public class ServerSocketCode
 
 			}).start();
 
+		ss.close();
 		}
 		
-		ss.close();
+		
 	}
 	
 }
