@@ -20,8 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e57e7641-1281-4367-9917-061372f6cae0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ServerCode/src/ClientSocketCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/ServerCode/src/ClientSocketCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ServerCode/src/ServerSocketCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/ServerCode/src/ServerSocketCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/production/ServerCode/ClientSocketCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ServerCode/ClientSocketCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/production/ServerCode/ServerSocketCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/production/ServerCode/ServerSocketCode.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +59,7 @@
       <recent name="C:\Users\a2395\OneDrive\Desktop\Newfolder2\MahjongEssential" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientSocketCode">
+  <component name="RunManager" selected="Application.ServerSocketCode">
     <configuration name="ClientSocketCode" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ClientSocketCode" />
       <module name="ServerCode" />
@@ -66,6 +70,12 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="MySQL_API" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerSocketCode (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ServerSocketCode" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -81,6 +91,7 @@
       <list>
         <item itemvalue="Application.ClientSocketCode" />
         <item itemvalue="Application.ServerSocketCode" />
+        <item itemvalue="Application.ServerSocketCode (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -120,22 +131,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="229" key="FileChooserDialogImpl/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597606404279" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1597612284567">
+    <state width="368" height="396" key="GridCell.Tab.0.bottom" timestamp="1597616273834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597612284567" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1597612284567">
+    <state width="368" height="396" key="GridCell.Tab.0.bottom/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597616273834" />
+    <state width="368" height="396" key="GridCell.Tab.0.center" timestamp="1597616273834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597612284567" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1597612284567">
+    <state width="368" height="396" key="GridCell.Tab.0.center/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597616273834" />
+    <state width="368" height="396" key="GridCell.Tab.0.left" timestamp="1597616273834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597612284567" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1597612284567">
+    <state width="368" height="396" key="GridCell.Tab.0.left/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597616273834" />
+    <state width="368" height="396" key="GridCell.Tab.0.right" timestamp="1597616273834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597612284567" />
+    <state width="368" height="396" key="GridCell.Tab.0.right/-1920.241.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1597616273834" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1597608229775">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

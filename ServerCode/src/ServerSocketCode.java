@@ -26,37 +26,43 @@ public class ServerSocketCode implements Runnable
 			try(Socket connection = this.sc.accept()){
 
 
-				System.out.println(connection.getInetAddress());
+				while(true) {
 
-				System.out.println("get data : ");
-				DataInputStream in = new DataInputStream(connection.getInputStream());
+					System.out.println("\n"+connection.getInetAddress());
+					DataInputStream in = new DataInputStream(connection.getInputStream());
 
-				String in_str = in.readUTF();
-				System.out.println("\t" + in_str);
+					String in_str = in.readUTF();
 
-				Pattern account_password = Pattern.compile("\\!(\\w+)\\+(\\w+)");
+					System.out.println("\tget : " + in_str);
 
-				StringTokenizer st = new StringTokenizer(in_str, "\\!(\\w+)\\+(\\w+)");
-				if(st.hasMoreTokens()){
-					String account = st.nextToken();
-					String password = st.nextToken();
+					var pattern = Pattern.compile("\\!(\\w+)\\+(\\w+)");
+					var matcher = pattern.matcher(in_str);
 
-					DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+					if (matcher.find()) {
+						String account = matcher.group(1);
+						String password = matcher.group(2);
 
-					if(account.equals("test_acc_1") &&
-					   password.equals("30678")){
+						DataOutputStream out = new DataOutputStream(connection.getOutputStream());
 
-						out.writeUTF("account & password is correct!");
+						String out_str;
+						if (account.equals("test_acc_1") &&
+								password.equals("30678")) {
 
-					}else{
 
-						out.writeUTF("account or password is wrong!");
+							out_str = "!1";
+						} else {
+
+							out_str = "!0";
+						}
+
+						System.out.println("\treturn : " + out_str);
+						out.writeUTF(out_str);
+						out.flush();
 					}
 
-
-					out.flush();
 				}
-
+			}catch(SocketException | EOFException e){
+				System.out.println("\tconnection breaked!");
 
 			}catch(IOException e){
 				e.printStackTrace();

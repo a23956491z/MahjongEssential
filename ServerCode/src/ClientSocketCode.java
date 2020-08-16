@@ -1,6 +1,8 @@
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 public class ClientSocketCode
 {
@@ -28,25 +30,44 @@ public class ClientSocketCode
 
 			System.out.println(sc.getLocalAddress()+ " connected to " + sc.getInetAddress());
 
-			Scanner scanner = new Scanner(System.in);
-			System.out.print("account : ");
-			String account = scanner.nextLine();
-			System.out.print("password : ");
-			String password = scanner.nextLine();
+			while(true) {
 
-			String account_password_format = "!" + account + "+" + password;
-			out.writeUTF(account_password_format);
-			out.flush();
+				var scanner = new Scanner(System.in);
+				System.out.print("account : ");
+				String account = scanner.nextLine();
+				System.out.print("password : ");
+				String password = scanner.nextLine();
 
-			String response = in.readUTF();
-			System.out.println("response : " + response);
+				String account_password_format = "!" + account + "+" + password;
+				out.writeUTF(account_password_format);
+				out.flush();
+
+				String response = in.readUTF();
+
+				var pattern = Pattern.compile("\\!([01])");
+				var matcher = pattern.matcher(response);
+
+
+				if(matcher.find()){
+					boolean if_authenticated = matcher.group(1).equals("1") ? true : false;
+
+					if(if_authenticated) {
+						System.out.println("Login successful!");
+						break;
+					}else{
+						System.out.println("Login Failed!");
+					}
+				}
+			}
 
 
 		}catch(SocketTimeoutException e){
 			System.out.println("Timeout!");
 		}
 		catch(IOException e){
+			System.out.println("wtf here");
 			e.printStackTrace();
 		}
 	}
+
 }
