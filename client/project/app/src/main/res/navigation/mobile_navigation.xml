@@ -9,7 +9,13 @@
         android:id="@+id/navigation_home"
         android:name="com.tens.mahjongessential.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_calculationFragment"
+            app:destination="@id/calculationFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +28,15 @@
         android:name="com.tens.mahjongessential.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/calculationFragment"
+        android:name="com.tens.mahjongessential.ui.calculation.calculationFragment"
+        android:label="fragment_calculation"
+        tools:layout="@layout/fragment_calculation" >
+        <action
+            android:id="@+id/action_calculationFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
 </navigation>
