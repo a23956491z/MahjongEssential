@@ -16,6 +16,7 @@
     <string name="invalid_password">密碼需大於5個字元</string>
     <string name="login_failed">"登入失敗"</string>
     <string name="title_activity_login">登入介面</string>
+<<<<<<< HEAD
     <string name="imagebutton1">imageButton1</string>
     <string name="imagebutton3">imagebutton3</string>
     <string name="imagebutton4">imagebutton4</string>
@@ -26,4 +27,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="calculation_button">返回</string>
     <string name="home_nuber1" />
+=======
+>>>>>>> a74c989989f984d13ec79f40e75d769aeab4c295
 </resources>
