@@ -36,7 +36,7 @@ public class Main {
                         	System.out.println("Name is " + name);
                         }
                         
-                        sql.print_role();
+                        //sql.print_role();
                         
                         String old_password, new_password, new_name;
                         System.out.println("change password !");
