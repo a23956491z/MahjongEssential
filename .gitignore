@@ -1,3 +1,5 @@
 bin/
-
+.idea/workspace.xml
+MySQL_API/.gradle/*
 *.class
+ServerCode/.setting
