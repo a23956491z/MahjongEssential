@@ -16,4 +16,10 @@
     <string name="invalid_password">密碼需大於5個字元</string>
     <string name="login_failed">"登入失敗"</string>
     <string name="title_activity_login">登入介面</string>
+    <string name="imagebutton1">imageButton1</string>
+    <string name="imagebutton3">imagebutton3</string>
+    <string name="imagebutton4">imagebutton4</string>
+    <string name="imagebutton2">imagebutton2</string>
+    <string name="loginbutton">登入</string>
+    <string name="loginview">目前登入帳戶:</string>
 </resources>
