@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 class Role{
 	
-	public String role_id;
+	public int role_id;
 	public String role_name;
 
 	//store serial number
@@ -28,12 +28,12 @@ class Role{
 	 */
 	public Role(Account account) {
 	}
-	public Role(String id, String name) {
+	public Role(int id, String name) {
 		role_id = id;
 		role_name = name;
 	}
 	
-	public String get_id(){
+	public int get_id(){
 		return role_id;
 	}
 	public String get_name(){
@@ -67,23 +67,13 @@ public class Role_list{
 	public Role_list() {
 	
 	}
-	
-	public int add_role(String id, String name) {
-		
-		if(if_exists(name)) {
-			return 0;
-		}
-		
-		role_list.add(new Role(id, name));
-		name_list.add(id);
-		return 1;
-	}
+
 	
 	public List<String> get_name_list(){
 		return name_list;
 	}
 	
-	public String get_id_by_name(String name) throws NoSuchElementException {
+	public int get_id_by_name(String name) throws NoSuchElementException {
 		
 		try {
 			
@@ -109,7 +99,59 @@ public class Role_list{
 		}
 
 	}
-	
+
+	public void print(){
+
+		System.out.println("test name list");
+		List<String> arr= get_name_list();
+		for(var i : arr){
+			System.out.println("\t" + i);
+		}
+
+		System.out.println("test role list");
+		for(var i : role_list){
+			System.out.print("\t");
+			System.out.print(i.role_id);
+			System.out.println("  " + i.role_name);
+		}
+	}
+
+	public int add_role(int id, String name) {
+
+		if(if_exists(name)) {
+			return 0;
+		}
+
+		role_list.add(new Role(id, name));
+		name_list.add(name);
+		return 1;
+	}
+
+	public int remove_role(String name){
+
+		if(if_exists(name) == false) {
+			return 0;
+		}
+
+		role_list.removeIf(x -> x.role_name.equals(name));
+		name_list.removeIf(x -> x.equals(name));
+		return 1;
+	}
+
+	public int change_name(String old_name ,String new_name){
+		if(if_exists(old_name) == false) {
+			return 0;
+		}
+
+		int index = role_list.indexOf(role_list.stream().filter(x -> x.role_name.equals(old_name)).findFirst().get());
+		role_list.set(index, new Role( get_id_by_name(old_name), new_name));
+
+		index = name_list.indexOf(old_name);
+		name_list.set(index, new_name);
+
+	return 1;
+
+	}
 	private boolean if_exists(String name) {
 		if(name_list.indexOf(name) !=  -1) {
 			return true;

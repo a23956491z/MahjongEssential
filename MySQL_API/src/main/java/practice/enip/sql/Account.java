@@ -266,7 +266,7 @@ public class Account extends Database_connector{
     	{
     		
     		while(rs.next()) {
-    			String role_id = rs.getString("role_id");
+    			int role_id = rs.getInt("role_id");
     			String role_name = rs.getString("role_name");
     			role_list.add_role(role_id, role_name);
     			
@@ -284,11 +284,151 @@ public class Account extends Database_connector{
     	
     	
     }
-    
-    public int change_role_name(String new_name) {
-    	return 0;
+
+    public int new_role(String name) throws ProfileDataException {
+    	try{
+    		get_account();
+		}catch(ProfileDataException p){
+
+			p.printStackTrace();
+			Throwable t = p.fillInStackTrace();
+			throw (ProfileDataException)t;
+			//print exception stack by set stack begin as this re-throw
+		}
+
+
+		try(Statement statement = connection.createStatement(
+				ResultSet.TYPE_SCROLL_SENSITIVE,
+				ResultSet.CONCUR_UPDATABLE))
+		{
+			ResultSet rs = statement.executeQuery("SELECT * FROM role_attribute WHERE login_account = \'"+login_account+"\' && role_name = \'"+name +"\'");
+
+			if(rs.next()) return 0;
+			else {
+				rs = statement.executeQuery("SELECT * FROM role_attribute");
+
+				rs.moveToInsertRow();
+				rs.updateString("login_account", login_account);
+				rs.updateString("role_name", name);
+
+				rs.insertRow();
+
+				rs = statement.executeQuery("SELECT * FROM role_attribute WHERE login_account = \'"+login_account+"\' && role_name = \'"+name +"\'");
+				if(rs.next()){
+
+					int role_id = rs.getInt("role_id");
+					role_list.add_role(role_id,name);
+
+/*
+					System.out.print("id : ");
+					System.out.println(role_list.get_id_by_name(name));
+					role_list.print();
+*/
+
+					return 1;
+				}else{
+					return 0;
+				}
+			}
+
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
+	public int delete_role(String name){
+
+		try{
+			get_account();
+		}catch(ProfileDataException p){
+
+			p.printStackTrace();
+			Throwable t = p.fillInStackTrace();
+			throw (ProfileDataException)t;
+			//print exception stack by set stack begin as this re-throw
+		}
+
+
+		try(Statement statement = connection.createStatement(
+				ResultSet.TYPE_SCROLL_SENSITIVE,
+				ResultSet.CONCUR_UPDATABLE);
+			ResultSet rs = statement.executeQuery("SELECT * FROM role_attribute WHERE login_account = \'"+login_account+"\' && role_name = \'"+name +"\'"))
+		{
+			if(rs.next()){
+
+				rs.last();
+				rs.deleteRow();
+
+				if(role_list.remove_role(name) == 0){
+					System.out.println("Role : "+name +" not Exists");
+
+				}else{
+					//role_list.print();
+					return 1;
+				}
+
+
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
+
+    public int change_role_name(String old_name, String new_name) {
+
+		try {
+			get_account();
+		}catch(ProfileDataException p){
+
+			p.printStackTrace();
+			Throwable t = p.fillInStackTrace();
+			throw (ProfileDataException)t;
+			//print exception stack by set stack begin as this re-throw
+		}
+
+		try(Statement statement = connection.createStatement(
+				ResultSet.TYPE_SCROLL_SENSITIVE,
+				ResultSet.CONCUR_UPDATABLE);
+			ResultSet rs = statement.executeQuery("SELECT * FROM role_attribute WHERE login_account = \'"+login_account+"\' && role_name = \'"+old_name +"\'")){
+
+			if(rs.next()) {
+				rs.last();
+				rs.updateString("role_name", new_name);
+				rs.updateRow();
+
+				if(role_list.change_name(old_name, new_name) == 1){
+
+					//role_list.print();
+					return 1;
+				}else{
+					System.out.println("Role : "+old_name +" not Exists");
+				}
+
+			}
+
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+		return 0;
     }
 
+    public List<String> get_role_nameList(){
+    	return role_list.get_name_list();
+	}
+
+	public void print_role(){
+    	role_list.print();
+	}
+
+	public int new_match(){
+    	return 1;
+	}
     
     private String get_sql_select_by_account(String account) {
     	return "SELECT * FROM user_attribute WHERE login_account = '"+account+"\'";
