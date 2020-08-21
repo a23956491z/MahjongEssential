@@ -83,7 +83,7 @@ public class Main {
 */
 
 
-                        /*
+
                         String old_password, new_password, new_name;
                         System.out.println("change password !");
                         
@@ -108,7 +108,7 @@ public class Main {
                         	System.out.println("Error!");
                         }
                         System.out.println("");
-                        */
+
 
                         /*
                         System.out.println("change name !");

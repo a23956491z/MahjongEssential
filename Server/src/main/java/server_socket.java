@@ -1,9 +1,11 @@
 import java.net.*;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.*;
+import practice.enip.sql.Account;
 
 public class server_socket
 {
@@ -69,15 +71,40 @@ public class server_socket
 				DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 				DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
 
-				while(true) {
+				//while(true) {
 
 					String identityCode = in.readUTF();
 
-					String in_str = in.readUTF();
-					System.out.println("\n" + clientSocket.getInetAddress() +" as identityCode : "+ identityCode);
+					String account = in.readUTF();
+					String password = in.readUTF();
+					String behaviour = in.readUTF();
 
-					System.out.println("\tget : " + in_str);
-				}
+					try(Account acc = new Account()){
+
+						Integer login_status = acc.authenticate(account, password);
+
+						System.out.println("\n" + clientSocket.getInetAddress() +" as identityCode : "+ identityCode);
+						System.out.println("/" + account + " - " + password);
+
+						switch(behaviour){
+							case "@1":
+
+								if(login_status.equals(1)){
+									System.out.println("\t There is a Valid Login for " + account);
+								}else{
+									System.out.println("\t There is a FAILED Login for " + account);
+								}
+
+								out.writeUTF(login_status.toString());
+								break;
+							default:
+								System.err.println("No matching behaviour!!!!");
+						}
+					}catch(SQLException e){
+						e.printStackTrace();
+					}
+
+				//}
 			}catch(SocketException e) {
 				System.out.println("A connection break from "+ address +" !!");
 			}
