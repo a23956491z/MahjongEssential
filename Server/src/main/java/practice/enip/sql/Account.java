@@ -21,7 +21,7 @@ import java.util.Map;
  * @author Enip
  *
  */
-public class Account extends Database_connector{
+public class Account extends Database_connector implements Server_method{
 	
 	private String login_account;
 	private String login_password;
@@ -66,6 +66,7 @@ public class Account extends Database_connector{
 	 *  this instance(user) from database or itself when it is not authenticated.
 	 */
 	@SuppressWarnings("unused")
+
 	public String get_password() throws ProfileDataException{
 		if(login_password == null)
 			throw new ProfileDataException("This account is not authenticated !");
@@ -76,8 +77,8 @@ public class Account extends Database_connector{
 	 * Accounts have a column call <code>account_name</code> (not the name of player)
 	 * which can be null, and when this account is exists and its name is actually null,
 	 * returning a empty <code>String</code> instead of null.
-	 * 
-	 * 
+	 *
+	 *
 	 * @return a <code>String</code> which is the name of account.
 	 * When the name of account is empty, returning a empty String.
 	 * @throws ProfileDataException appears, someone trying to get information of
@@ -119,6 +120,7 @@ public class Account extends Database_connector{
 	 *  <LI> -1 stands for could not find the account in database or occurs some exception
 	 *  		from connecting or selecting(<code>SQLException</code>)
 	 */
+	@Override
     public int authenticate(String account, String password){
 
         String get_password_by_account = ("SELECT password FROM user_attribute WHERE login_account = '"+account + "'");
@@ -160,6 +162,7 @@ public class Account extends Database_connector{
      * 	<LI> 0 stands for registration failed by the account is aleardy exists.
      * 	<LI> -1 stands for some exception from connecting or selecting(<code>SQLException</code>) occur
      */
+	@Override
     public int new_account(String account, String password, String name) {
 		
 		try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -190,6 +193,7 @@ public class Account extends Database_connector{
 	}
 
 	@SuppressWarnings("unused")
+	@Override
     public int change_password(String old_password, String new_password) throws ProfileDataException{
     	
     	try {
@@ -227,6 +231,7 @@ public class Account extends Database_connector{
     }
 
 	@SuppressWarnings("unused")
+	@Override
     public int change_name(String name) throws ProfileDataException{
     	
     	try {
@@ -259,43 +264,9 @@ public class Account extends Database_connector{
     	return 0;
     }
 
-	@SuppressWarnings("UnusedReturnValue")
-    public int get_roles() throws ProfileDataException {
-    	try {
-    		
-    		get_account();
-    	}catch(ProfileDataException p){
-    		
-    		p.printStackTrace();
-    		Throwable t = p.fillInStackTrace();
-    		throw (ProfileDataException)t;
-    		//print exception stack by set stack begin as this re-throw
-    	}
-
-    	try(Statement statement = connection.createStatement();
-    		ResultSet rs = statement.executeQuery
-    				("SELECT * FROM role_attribute WHERE login_account = '"+login_account+"'"))
-    	{
-    		
-    		while(rs.next()) {
-    			int role_id = rs.getInt("role_id");
-    			String role_name = rs.getString("role_name");
-    			role_list.add_role(role_id, role_name);
-    			
-    		}
-    		
-			return 1;
-			
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-    	
-    	
-    	return 0;
-    }
 
 	@SuppressWarnings("unused")
+	@Override
     public int new_role(String name) throws ProfileDataException {
     	try{
     		get_account();
@@ -350,6 +321,7 @@ public class Account extends Database_connector{
 	}
 
 	@SuppressWarnings("unused")
+	@Override
 	public int delete_role(String name){
 
 		try{
@@ -390,7 +362,7 @@ public class Account extends Database_connector{
 		return 0;
 	}
 
-
+	@Override
     public int change_role_name(String old_name, String new_name) {
 
 		try {
@@ -442,6 +414,7 @@ public class Account extends Database_connector{
     	role_list.print();
 	}
 
+	@Override
 	public int new_match(Match match){
 
 		try{
@@ -516,6 +489,7 @@ public class Account extends Database_connector{
 	}
 
 	@SuppressWarnings("unused")
+	@Override
 	public int get_match(){
 		try {
 
@@ -573,7 +547,45 @@ public class Account extends Database_connector{
 		return 0;
 
 	}
-    
+
+
+
+	@SuppressWarnings("UnusedReturnValue")
+	private int get_roles() throws ProfileDataException {
+		try {
+
+			get_account();
+		}catch(ProfileDataException p){
+
+			p.printStackTrace();
+			Throwable t = p.fillInStackTrace();
+			throw (ProfileDataException)t;
+			//print exception stack by set stack begin as this re-throw
+		}
+
+		try(Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery
+					("SELECT * FROM role_attribute WHERE login_account = '"+login_account+"'"))
+		{
+
+			while(rs.next()) {
+				int role_id = rs.getInt("role_id");
+				String role_name = rs.getString("role_name");
+				role_list.add_role(role_id, role_name);
+
+			}
+
+			return 1;
+
+
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+
+		return 0;
+	}
+
     private String get_sql_select_by_account(String account) {
     	return "SELECT * FROM user_attribute WHERE login_account = '"+account+"'";
     }

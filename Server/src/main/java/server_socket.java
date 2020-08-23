@@ -6,13 +6,13 @@ import practice.enip.sql.Account;
 
 public class server_socket
 {
-	final private static int port = 8080;
+	final private static int port = 8081;
 	private ServerSocket sc;
 
 
 	public static void main(String[] args)throws IOException
 	{
-		try( ServerSocket ss = new ServerSocket(8080))
+		try( ServerSocket ss = new ServerSocket(port))
 		{
 			while(true)
 			{

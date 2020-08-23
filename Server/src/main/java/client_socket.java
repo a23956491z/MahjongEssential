@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class client_socket
 {
+	final private static int port = 8081;
 	private static Integer identityCode;
 
 	public static void main(String[] args)
@@ -16,10 +17,10 @@ public class client_socket
 	}
 	public static boolean ClientLogin( String account, String password)
 	{
-		try(Socket cs = new Socket("127.0.0.1", 8080))
+		try(Socket cs = new Socket("127.0.0.1", port))
         {
         	int timeout = 2000;
-        	SocketAddress sa = new InetSocketAddress("127.0.0.1", 8080);
+        	SocketAddress sa = new InetSocketAddress("127.0.0.1", port);
         	System.out.println("waiting connect......");
         	cs.connect(sa, timeout);
 
@@ -39,7 +40,6 @@ public class client_socket
 					return true;
 				default:
 					System.out.println("Login fail");
-					return false;
 			}
 
         }catch(SocketTimeoutException e)
@@ -50,5 +50,7 @@ public class client_socket
         {
             e.printStackTrace();
         }
+
+		return false;
 	}
 }
