@@ -5,13 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.tens.mahjongessential.R;
 
@@ -32,6 +31,11 @@ public class DashboardFragment extends Fragment {
             }
         });*/
         return root;
-
     }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().findViewById(R.id.login_button).
+        setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_navigation_dashboard_to_loginFragment));
+        }
 }
