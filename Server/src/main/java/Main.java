@@ -1,9 +1,9 @@
 import practice.enip.sql.Account;
+import practice.enip.sql.Match;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -12,12 +12,12 @@ public class Main {
     public static void main(String[] args) {
 
 
-        try(Account sql = new Account();){
+        try(Account sql = new Account()){
         	try(Scanner scanner = new Scanner(System.in)){
         	
         	String account, password, name;
         	//new_account(scanner, sql);
-        	
+
             while(true){
 
                 if(TESTING){
@@ -51,11 +51,51 @@ public class Main {
                         	System.out.println("Name is " + name);
                         }
 
+
                         System.out.println("Role names : ");
                         List<String> arr= sql.get_role_nameList();
                         for(var i : arr){
                             System.out.println("\t" + i);
                         }
+
+
+/*
+                        Match match = new Match();
+                        match.new_round_auto_increase( Stream.of(
+                                new AbstractMap.SimpleEntry<>("coddy", 2),
+                                new AbstractMap.SimpleEntry<>("handy", -2))
+                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                        );
+                        match.new_round_auto_increase( Stream.of(
+                                new AbstractMap.SimpleEntry<>("leo", 5),
+                                new AbstractMap.SimpleEntry<>("mikey", -5))
+                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                        );
+                        match.new_round_auto_increase( Stream.of(
+                                new AbstractMap.SimpleEntry<>("handy", 11),
+                                new AbstractMap.SimpleEntry<>("mikey", -5),
+                                new AbstractMap.SimpleEntry<>("coddy", -3),
+                                new AbstractMap.SimpleEntry<>("leo", -3))
+                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                        );
+                        match.new_round_auto_increase( Stream.of(
+                                new AbstractMap.SimpleEntry<>("handy", 4),
+                                new AbstractMap.SimpleEntry<>("leo", -4))
+                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                        );
+                        match.new_round_auto_increase( Stream.of(
+                                new AbstractMap.SimpleEntry<>("mikey", 3),
+                                new AbstractMap.SimpleEntry<>("leo", -3))
+                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                        );
+
+                        System.out.println(match.get_round());
+
+
+                        int status = sql.new_match(match);
+                        System.out.println(status);
+*/
+                        sql.get_match();
 
 
 /*
@@ -82,7 +122,7 @@ public class Main {
                         }
 */
 
-
+/*
 
                         String old_password, new_password, new_name;
                         System.out.println("change password !");
@@ -108,7 +148,7 @@ public class Main {
                         	System.out.println("Error!");
                         }
                         System.out.println("");
-
+*/
 
                         /*
                         System.out.println("change name !");
