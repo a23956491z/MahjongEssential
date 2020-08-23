@@ -83,6 +83,7 @@ public class Account extends Database_connector{
 	 * @throws ProfileDataException appears, someone trying to get information of
 	 *  this instance(user) from database or itself when it is not authenticated.
 	 */
+
 	public String get_name() throws ProfileDataException{
 			
 		if(is_authenticated()) {
@@ -556,11 +557,11 @@ public class Account extends Database_connector{
 
 
 			}
-
+/*
 			for(var entry : match_map.entrySet()){
 				entry.getValue().print();
 			}
-
+*/
 			return 1;
 
 

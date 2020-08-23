@@ -47,7 +47,7 @@ public class Database_connector implements AutoCloseable{
     private static Connection getConnection() throws SQLException {
         String serverName = "localhost";
         String database = "database_mje_test";
-        String url = "jdbc:mysql://" + serverName + "/" + database;
+        String url = "jdbc:mysql://" + serverName + "/" + database + "?serverTimezone=UTC";
 
         return DriverManager.getConnection(url, USER, PASS);
     }
@@ -58,6 +58,7 @@ public class Database_connector implements AutoCloseable{
         try {
         	connection = getConnection(); //connecting
         }catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Connecting to database failed!!");
         }
     }

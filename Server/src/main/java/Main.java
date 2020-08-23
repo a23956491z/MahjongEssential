@@ -21,8 +21,8 @@ public class Main {
             while(true){
 
                 if(TESTING){
-                    account = "test_acc_1";
-                    password = "30678";
+                    account = "test_acc_2";
+                    password = "1234";
 
                     System.out.println("Default account : " + account);
                 }else{
@@ -95,7 +95,7 @@ public class Main {
                         int status = sql.new_match(match);
                         System.out.println(status);
 */
-                        sql.get_match();
+                        //sql.get_match();
 
 
 /*
