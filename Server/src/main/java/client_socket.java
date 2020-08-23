@@ -1,12 +1,18 @@
 import java.net.*;
 import java.io.*;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 public class client_socket
 {
+	private static Integer identityCode;
+
 	public static void main(String[] args)
 	{
 		ClientLogin("abc123","123123");
-	
+
 	}
 	public static boolean ClientLogin( String account, String password)
 	{
@@ -16,7 +22,7 @@ public class client_socket
         	SocketAddress sa = new InetSocketAddress("127.0.0.1", 8080);
         	System.out.println("waiting connect......");
         	cs.connect(sa, timeout);
-        	
+
         	DataInputStream in = new DataInputStream(cs.getInputStream());
 			DataOutputStream out = new DataOutputStream(cs.getOutputStream());
 
@@ -24,7 +30,7 @@ public class client_socket
 			out.writeUTF(account);
 			out.writeUTF(password);
 			out.writeUTF(act);
-			
+
 			String result = in.readUTF();
 			switch(result)
 			{
@@ -35,7 +41,7 @@ public class client_socket
 					System.out.println("Login fail");
 					return false;
 			}
-			
+
         }catch(SocketTimeoutException e)
         {
 			System.out.println("Timeout");

@@ -6,6 +6,10 @@ import practice.enip.sql.Account;
 
 public class server_socket
 {
+	final private static int port = 8080;
+	private ServerSocket sc;
+
+
 	public static void main(String[] args)throws IOException
 	{
 		try( ServerSocket ss = new ServerSocket(8080))
@@ -14,8 +18,8 @@ public class server_socket
 			{
 				System.out.println("waiting connect......");
 				Socket cs= ss.accept();
-				System.out.println("connect accept¡I");
-        
+				System.out.println("connect acceptï¿½I");
+
 				new Thread(new Runnable()
 				{
 					@Override
@@ -25,11 +29,11 @@ public class server_socket
 						{
 							DataInputStream in = new DataInputStream(cs.getInputStream());
 							DataOutputStream out = new DataOutputStream(cs.getOutputStream());
-							
+
 							String account = in.readUTF();
 							String password = in.readUTF();
 							String act = in.readUTF();
-							
+
 							try(Account acc = new Account())
 							{
 								Integer login_status = acc.authenticate(account, password);
@@ -55,7 +59,7 @@ public class server_socket
 								e.printStackTrace();
 							}
 
-							
+
 							cs.close();
 						}
 						catch (IOException e)
@@ -63,9 +67,9 @@ public class server_socket
 							e.printStackTrace();
 						}
 					}
-				}).start();					
+				}).start();
 			}
-		}catch(SocketException e) 
+		}catch(SocketException e)
 		{
 			e.printStackTrace();
 		}
@@ -73,6 +77,7 @@ public class server_socket
 		{
 			e.printStackTrace();
 		}
-		
+
 	}
+
 }
