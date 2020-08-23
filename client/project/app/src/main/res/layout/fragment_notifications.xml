@@ -13,11 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/gmaerecord"
+        android:text="@string/gamerecord"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/game_record"
         android:layout_width="384dp"
         android:layout_height="549dp"
         android:layout_marginStart="16dp"

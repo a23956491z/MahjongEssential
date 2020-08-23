@@ -5,7 +5,7 @@
     <string name="title_notifications">近期對戰紀錄</string>
     <string name="dice">擲骰</string>
     <string name="tsumo">自摸</string>
-    <string name="gmaerecord">對戰紀錄</string>
+    <string name="gamerecord">對戰紀錄</string>
     <!-- Strings related to login -->
     <string name="prompt_email">帳號</string>
     <string name="prompt_password">密碼</string>
@@ -16,7 +16,7 @@
     <string name="invalid_password">密碼需大於5個字元</string>
     <string name="login_failed">"登入失敗"</string>
     <string name="title_activity_login">登入介面</string>
-<<<<<<< HEAD
+    <string name="account_data_tv">用戶玩家資料</string>
     <string name="imagebutton1">imageButton1</string>
     <string name="imagebutton3">imagebutton3</string>
     <string name="imagebutton4">imagebutton4</string>
@@ -27,6 +27,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="calculation_button">返回</string>
     <string name="home_nuber1" />
-=======
->>>>>>> a74c989989f984d13ec79f40e75d769aeab4c295
+    <string name="login_txt">登入</string>
+    <string name="loginview_txt">目前登入帳戶:</string>
+    <string name="player1_desc">Player1</string>
+    <string name="player2_desc">Player2</string>
+    <string name="player4_desc">Player4</string>
+    <string name="player3_desc">Player3</string>
 </resources>
